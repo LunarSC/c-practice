@@ -33,12 +33,35 @@ void selectionSort(int arr[], int len)
         int temp = 0;
         for (int j = i + 1; j < len; j++)
         {
-            if (compare(&arr[i], &arr[j]))
+            if (compare(&arr[i], &arr[j]) > 0)
             {
                 swap(&arr[i], &arr[j]);
             }
         }
     }
+}
+
+//O(n) best case recursive call
+void bubbleSort(int arr[], int len)
+{
+    if (len == 1)
+    {
+        return;
+    }
+
+    for (int i = 0; i < len - 1; i++)
+    {
+        if (compare(&arr[i], &arr[i + 1]) > 0)
+        {
+            swap(&arr[i], &arr[i + 1]);
+        }
+    }
+    bubbleSort(arr, len - 1);
+}
+
+void mergeSort(int arr[], int len)
+{
+
 }
 
 int main()
@@ -47,7 +70,9 @@ int main()
     int len = sizeof(arr) / sizeof(*arr);
     printf("----------- UNSORTED ARRAY -----------\n");
     printArray(arr, len);
-    selectionSort(arr, len);
+    //selectionSort(arr, len);
+    //bubbleSort(arr, len);
+
     printf("----------- SORTED ARRAY -----------\n");
     printArray(arr, len);
 }
