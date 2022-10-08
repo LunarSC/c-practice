@@ -74,7 +74,7 @@ void insertionSort(int arr[], int len)
     }
 }
 
-void mergeSort(int arr[], int len)
+void heapSort(int arr[], int len)
 {
 
 }
@@ -89,7 +89,7 @@ int main()
     //selectionSort(arr, len);
     //bubbleSort(arr, len);
     //insertionSort(arr, len);
-    //mergeSort(arr, len);
+    heapSort(arr, len);
 
     printf("----------- SORTED ARRAY -----------\n");
     printArray(arr, len);
