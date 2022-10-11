@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdalign.h>
 
 struct node
 {
@@ -50,4 +51,5 @@ int main()
     insertNode(rootNode, 25);
     insertNode(rootNode, 100);
     print(rootNode);
+    printf("\nBinary Tree Size: %i\nBinary Tree Alignment: %i\n", sizeof(struct node), alignof(struct node));
 }
