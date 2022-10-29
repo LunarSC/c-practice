@@ -10,11 +10,11 @@ int main(int argc, char **argv)
     }
     else
     {
-        printf("String size: %zu\n", n);
         size_t n = strlen(argv[1]);
+        printf("String size: %zu\n", n);
         for (int i = 0; i < n; i++)
         {
-            printf("%c\n", (argv[1]) + i);
+            printf("%c\n", argv[1][i]);
         }
     }
 }
