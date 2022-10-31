@@ -22,7 +22,7 @@ bool isPrime(int *x)
 int *generatePrimes(int *limit)
 {
     size_t INITSIZE = 1;
-    int primes[INITSIZE];
+    int *primes = malloc(5 * sizeof *primes);
     int ARRSIZE = sizeof(primes) / sizeof(int);
     for (int i = 0; i < *limit; i++)
     {
@@ -38,7 +38,7 @@ int *generatePrimes(int *limit)
             }
 
         }
-        if (isPrime(*i))
+        if (isPrime(&i))
         {
             primes[ARRSIZE] = i;
         }
@@ -48,6 +48,7 @@ int *generatePrimes(int *limit)
     {
         printf("primes[%i] = %i\n", i, primes[i]);
     }
+    return primes;
 }
 
 int main(int argc, char *argv[])
@@ -58,9 +59,11 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    //int input = atoi(argv[1]);
+    int input = atoi(argv[1]);
 
     //bool prime = isPrime(&input);
     //printf("%i is prime: %s\n", input, prime ? "true" : "false");
+
+    int *primes = generatePrimes(&input);
 }
 
