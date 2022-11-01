@@ -2,10 +2,21 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+//Prints a given array
+void printArray(int arr[], int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("primes[%i] = %i\n", i, arr[i]);
+    }
+    printf("\n");
+}
+
 bool isPrime(int *x)
 {
     if (*x ==0 || *x == 1 || *x < 0)
     {
+        printf("0 and 1 are not primes.\n");
         return false;
     }
     for (int i = 2; i <= *x / 2; i++)
@@ -16,38 +27,44 @@ bool isPrime(int *x)
             return false;
         }
     }
+    printf("%d is prime!\n", *x);
     return true;
 }
 
 int *generatePrimes(int *limit)
 {
-    size_t INITSIZE = 1;
-    int *primes = malloc(5 * sizeof *primes);
-    int ARRSIZE = sizeof(primes) / sizeof(int);
-    for (int i = 0; i < *limit; i++)
+    int *primes = malloc(sizeof(int));
+    int ARRPOS = 0;
+    for (int i = 0; i <= *limit; i++)
     {
-        printf("For loop generate primes - i = %d, limit = %d\n", i, *limit);
-        if (i > (ARRSIZE - 1))
-        {
-            printf("Resizing primes array to size %d\n", i * ARRSIZE);
-            int *tmp = (int*) realloc(primes, i * ARRSIZE);
-            if (tmp)
-            {
-                *primes = *tmp;
-                ARRSIZE = sizeof(primes) / sizeof(int);
-            }
-
-        }
+        printf("For loop generate primes - i = %d, limit = %d, ARRPOS = %d\n", i, *limit, ARRPOS);
         if (isPrime(&i))
         {
-            primes[ARRSIZE] = i;
+            //Reallocate memory, add another slot to the array
+            printf("Resizing primes array to size %d\n", ARRPOS + (sizeof *primes));
+            int *tmp;
+            tmp = realloc(primes, (ARRPOS + 1) * (sizeof *primes));
+            if (tmp)
+            {
+                if (i != 2)
+                {
+                    primes = tmp;
+                }
+            }
+            else
+            {
+                printf("----- REALLOC FAILED -----");
+                exit(1);
+            }
+            //Put the new prime in the array
+            printf("primes[%i] = %i\n", ARRPOS, i);
+            primes[ARRPOS] = i;
+            ARRPOS++;
         }
     }
 
-    for (int i = 0; i < ARRSIZE; i++)
-    {
-        printf("primes[%i] = %i\n", i, primes[i]);
-    }
+    printf("------- Prime Array -------\n");
+    printArray(primes, ARRPOS);
     return primes;
 }
 
